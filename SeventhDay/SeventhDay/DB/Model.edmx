@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Archives">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobblessID" Type="int" Nullable="false" />
+          <Property Name="JobID" Type="int" Nullable="false" />
+          <Property Name="ArchivistID" Type="int" Nullable="false" />
+          <Property Name="ArchivesDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Jobless">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Patronymic" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Age" Type="tinyint" Nullable="false" />
+          <Property Name="Passport" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PassportDate" Type="datetime" Nullable="false" />
+          <Property Name="Region" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Picture" Type="image" Nullable="false" />
+          <Property Name="StudyPlace" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="StudyAddress" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="StudyTypeID" Type="int" Nullable="false" />
+          <Property Name="RegistratorID" Type="int" Nullable="false" />
+          <Property Name="RegDate" Type="datetime" Nullable="false" />
+          <Property Name="Payment" Type="decimal" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="Experience" Type="bit" Nullable="false" />
+          <Property Name="Comment" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudyTypies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vacancies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrganizationName" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="OrganizationAddress" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="OrganizationPhone" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="VacancyName" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="More" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_Archives_Jobless">
+          <End Role="Jobless" Type="Self.Jobless" Multiplicity="1" />
+          <End Role="Archives" Type="Self.Archives" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jobless">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Archives">
+              <PropertyRef Name="JobblessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Archives_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Archives" Type="Self.Archives" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Archives">
+              <PropertyRef Name="ArchivistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Archives_Vacancies">
+          <End Role="Vacancies" Type="Self.Vacancies" Multiplicity="1" />
+          <End Role="Archives" Type="Self.Archives" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vacancies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Archives">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jobless_StudyTypies">
+          <End Role="StudyTypies" Type="Self.StudyTypies" Multiplicity="1" />
+          <End Role="Jobless" Type="Self.Jobless" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudyTypies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jobless">
+              <PropertyRef Name="StudyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jobless_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Jobless" Type="Self.Jobless" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jobless">
+              <PropertyRef Name="RegistratorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="Archives" EntityType="Self.Archives" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jobless" EntityType="Self.Jobless" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudyTypies" EntityType="Self.StudyTypies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vacancies" EntityType="Self.Vacancies" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Archives_Jobless" Association="Self.FK_Archives_Jobless">
+            <End Role="Jobless" EntitySet="Jobless" />
+            <End Role="Archives" EntitySet="Archives" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Archives_Users" Association="Self.FK_Archives_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Archives" EntitySet="Archives" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Archives_Vacancies" Association="Self.FK_Archives_Vacancies">
+            <End Role="Vacancies" EntitySet="Vacancies" />
+            <End Role="Archives" EntitySet="Archives" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jobless_StudyTypies" Association="Self.FK_Jobless_StudyTypies">
+            <End Role="StudyTypies" EntitySet="StudyTypies" />
+            <End Role="Jobless" EntitySet="Jobless" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jobless_Users" Association="Self.FK_Jobless_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Jobless" EntitySet="Jobless" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Archives" EntityType="Model.Archives" />
+          <EntitySet Name="Jobless" EntityType="Model.Jobless" />
+          <EntitySet Name="StudyTypies" EntityType="Model.StudyTypies" />
+          <EntitySet Name="sysdiagrams" EntityType="Model.sysdiagrams" />
+          <EntitySet Name="Users" EntityType="Model.Users" />
+          <EntitySet Name="Vacancies" EntityType="Model.Vacancies" />
+          <AssociationSet Name="FK_Archives_Jobless" Association="Model.FK_Archives_Jobless">
+            <End Role="Jobless" EntitySet="Jobless" />
+            <End Role="Archives" EntitySet="Archives" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Archives_Users" Association="Model.FK_Archives_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Archives" EntitySet="Archives" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Archives_Vacancies" Association="Model.FK_Archives_Vacancies">
+            <End Role="Vacancies" EntitySet="Vacancies" />
+            <End Role="Archives" EntitySet="Archives" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jobless_StudyTypies" Association="Model.FK_Jobless_StudyTypies">
+            <End Role="StudyTypies" EntitySet="StudyTypies" />
+            <End Role="Jobless" EntitySet="Jobless" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jobless_Users" Association="Model.FK_Jobless_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Jobless" EntitySet="Jobless" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Archives">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobblessID" Type="Int32" Nullable="false" />
+          <Property Name="JobID" Type="Int32" Nullable="false" />
+          <Property Name="ArchivistID" Type="Int32" Nullable="false" />
+          <Property Name="ArchivesDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Jobless" Relationship="Model.FK_Archives_Jobless" FromRole="Archives" ToRole="Jobless" />
+          <NavigationProperty Name="Users" Relationship="Model.FK_Archives_Users" FromRole="Archives" ToRole="Users" />
+          <NavigationProperty Name="Vacancies" Relationship="Model.FK_Archives_Vacancies" FromRole="Archives" ToRole="Vacancies" />
+        </EntityType>
+        <EntityType Name="Jobless">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Patronymic" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Byte" Nullable="false" />
+          <Property Name="Passport" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PassportDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Region" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="StudyPlace" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="StudyAddress" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="StudyTypeID" Type="Int32" Nullable="false" />
+          <Property Name="RegistratorID" Type="Int32" Nullable="false" />
+          <Property Name="RegDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Payment" Type="Decimal" Nullable="false" Precision="15" Scale="0" />
+          <Property Name="Experience" Type="Boolean" Nullable="false" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Archives" Relationship="Model.FK_Archives_Jobless" FromRole="Jobless" ToRole="Archives" />
+          <NavigationProperty Name="StudyTypies" Relationship="Model.FK_Jobless_StudyTypies" FromRole="Jobless" ToRole="StudyTypies" />
+          <NavigationProperty Name="Users" Relationship="Model.FK_Jobless_Users" FromRole="Jobless" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="StudyTypies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Jobless" Relationship="Model.FK_Jobless_StudyTypies" FromRole="StudyTypies" ToRole="Jobless" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Archives" Relationship="Model.FK_Archives_Users" FromRole="Users" ToRole="Archives" />
+          <NavigationProperty Name="Jobless" Relationship="Model.FK_Jobless_Users" FromRole="Users" ToRole="Jobless" />
+        </EntityType>
+        <EntityType Name="Vacancies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrganizationName" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="OrganizationAddress" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="OrganizationPhone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VacancyName" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="15" Scale="0" />
+          <Property Name="More" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Archives" Relationship="Model.FK_Archives_Vacancies" FromRole="Vacancies" ToRole="Archives" />
+        </EntityType>
+        <Association Name="FK_Archives_Jobless">
+          <End Type="Model.Jobless" Role="Jobless" Multiplicity="1" />
+          <End Type="Model.Archives" Role="Archives" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jobless">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Archives">
+              <PropertyRef Name="JobblessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Archives_Users">
+          <End Type="Model.Users" Role="Users" Multiplicity="1" />
+          <End Type="Model.Archives" Role="Archives" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Archives">
+              <PropertyRef Name="ArchivistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Archives_Vacancies">
+          <End Type="Model.Vacancies" Role="Vacancies" Multiplicity="1" />
+          <End Type="Model.Archives" Role="Archives" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vacancies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Archives">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jobless_StudyTypies">
+          <End Type="Model.StudyTypies" Role="StudyTypies" Multiplicity="1" />
+          <End Type="Model.Jobless" Role="Jobless" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudyTypies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jobless">
+              <PropertyRef Name="StudyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jobless_Users">
+          <End Type="Model.Users" Role="Users" Multiplicity="1" />
+          <End Type="Model.Jobless" Role="Jobless" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jobless">
+              <PropertyRef Name="RegistratorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entity">
+          <EntitySetMapping Name="Archives">
+            <EntityTypeMapping TypeName="Model.Archives">
+              <MappingFragment StoreEntitySet="Archives">
+                <ScalarProperty Name="ArchivesDate" ColumnName="ArchivesDate" />
+                <ScalarProperty Name="ArchivistID" ColumnName="ArchivistID" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="JobblessID" ColumnName="JobblessID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobless">
+            <EntityTypeMapping TypeName="Model.Jobless">
+              <MappingFragment StoreEntitySet="Jobless">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+                <ScalarProperty Name="RegistratorID" ColumnName="RegistratorID" />
+                <ScalarProperty Name="StudyTypeID" ColumnName="StudyTypeID" />
+                <ScalarProperty Name="StudyAddress" ColumnName="StudyAddress" />
+                <ScalarProperty Name="StudyPlace" ColumnName="StudyPlace" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="PassportDate" ColumnName="PassportDate" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudyTypies">
+            <EntityTypeMapping TypeName="Model.StudyTypies">
+              <MappingFragment StoreEntitySet="StudyTypies">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Model.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vacancies">
+            <EntityTypeMapping TypeName="Model.Vacancies">
+              <MappingFragment StoreEntitySet="Vacancies">
+                <ScalarProperty Name="More" ColumnName="More" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="VacancyName" ColumnName="VacancyName" />
+                <ScalarProperty Name="OrganizationPhone" ColumnName="OrganizationPhone" />
+                <ScalarProperty Name="OrganizationAddress" ColumnName="OrganizationAddress" />
+                <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

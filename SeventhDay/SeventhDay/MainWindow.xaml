@@ -1,0 +1,28 @@
+﻿<Window x:Class="SeventhDay.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SeventhDay"
+        mc:Ignorable="d"
+        Title="Биржа труда - Авторизация" FontSize="16" Background="LightSkyBlue" WindowStartupLocation="CenterScreen" MinHeight="280" MinWidth="480" Height="300" Width="500">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Авторизация" TextAlignment="Center" Margin="5"/>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                <TextBlock Text="  Логин: "/>
+                <TextBox x:Name="tbxLogin" KeyDown="keydawn_Login" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                <TextBlock Text="Поарль: "/>
+                <PasswordBox x:Name="pbxPassword" KeyDown="keydown_PAssword" Width="200"/>
+            </StackPanel>
+            
+            <CheckBox x:Name="chbxRemberMe" Content="Запомнить меня" HorizontalAlignment="Center" Margin="5"/>
+            
+            <Button Click="clickAuthorization" Content="Авторизоваться"/>
+        </StackPanel>
+    </Grid>
+</Window>

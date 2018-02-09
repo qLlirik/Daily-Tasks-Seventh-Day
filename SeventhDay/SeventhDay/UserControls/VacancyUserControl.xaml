@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="SeventhDay.UserControls.VacancyUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SeventhDay.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="180" d:DesignWidth="155" Height="180" Width="155">
+    <Grid Margin="10">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock x:Name="txbOrganizationName" TextWrapping="Wrap" TextAlignment="Center" Text="{Binding Path=OrganizationName}" Margin="5"/>
+            <TextBlock x:Name="txbVacancyName" TextWrapping="Wrap" TextAlignment="Center" Text="{Binding Path=VacancyName}" Margin="5"/>
+            <TextBlock x:Name="txbPrice" TextWrapping="Wrap" TextAlignment="Center" Text="{Binding Path=Price}" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
