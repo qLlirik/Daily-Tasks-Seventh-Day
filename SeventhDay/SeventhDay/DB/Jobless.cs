@@ -39,6 +39,7 @@ namespace SeventhDay.DB
         public decimal Payment { get; set; }
         public bool Experience { get; set; }
         public string Comment { get; set; }
+        public bool Used { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Archives> Archives { get; set; }

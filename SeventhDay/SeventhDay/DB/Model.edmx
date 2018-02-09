@@ -37,7 +37,8 @@
           <Property Name="RegDate" Type="datetime" Nullable="false" />
           <Property Name="Payment" Type="decimal" Precision="15" Scale="0" Nullable="false" />
           <Property Name="Experience" Type="bit" Nullable="false" />
-          <Property Name="Comment" Type="varchar(max)" Nullable="false" />
+          <Property Name="Comment" Type="varchar(max)" />
+          <Property Name="Used" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="StudyTypies">
           <Key>
@@ -76,6 +77,7 @@
           <Property Name="VacancyName" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="15" Scale="0" Nullable="false" />
           <Property Name="More" Type="varchar(max)" />
+          <Property Name="Used" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Archives_Jobless">
           <End Role="Jobless" Type="Self.Jobless" Multiplicity="1" />
@@ -232,7 +234,8 @@
           <Property Name="RegDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Payment" Type="Decimal" Nullable="false" Precision="15" Scale="0" />
           <Property Name="Experience" Type="Boolean" Nullable="false" />
-          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Used" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Archives" Relationship="Model.FK_Archives_Jobless" FromRole="Jobless" ToRole="Archives" />
           <NavigationProperty Name="StudyTypies" Relationship="Model.FK_Jobless_StudyTypies" FromRole="Jobless" ToRole="StudyTypies" />
           <NavigationProperty Name="Users" Relationship="Model.FK_Jobless_Users" FromRole="Jobless" ToRole="Users" />
@@ -277,6 +280,7 @@
           <Property Name="VacancyName" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="15" Scale="0" />
           <Property Name="More" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Used" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Archives" Relationship="Model.FK_Archives_Vacancies" FromRole="Vacancies" ToRole="Archives" />
         </EntityType>
         <Association Name="FK_Archives_Jobless">
@@ -339,7 +343,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -359,6 +363,7 @@
           <EntitySetMapping Name="Jobless">
             <EntityTypeMapping TypeName="Model.Jobless">
               <MappingFragment StoreEntitySet="Jobless">
+                <ScalarProperty Name="Used" ColumnName="Used" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="Experience" ColumnName="Experience" />
                 <ScalarProperty Name="Payment" ColumnName="Payment" />
@@ -413,6 +418,7 @@
           <EntitySetMapping Name="Vacancies">
             <EntityTypeMapping TypeName="Model.Vacancies">
               <MappingFragment StoreEntitySet="Vacancies">
+                <ScalarProperty Name="Used" ColumnName="Used" />
                 <ScalarProperty Name="More" ColumnName="More" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="VacancyName" ColumnName="VacancyName" />

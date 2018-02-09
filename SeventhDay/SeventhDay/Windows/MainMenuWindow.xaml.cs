@@ -38,5 +38,11 @@ namespace SeventhDay.Windows
             new VacanciesWindow().Show();
             this.Close();
         }
+
+        private void click_AddNewJobless(object sender, RoutedEventArgs e)
+        {
+            new AddNewJoblessWindow().Show();
+            this.Close();
+        }
     }
 }

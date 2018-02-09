@@ -27,6 +27,7 @@ namespace SeventhDay.DB
         public string VacancyName { get; set; }
         public decimal Price { get; set; }
         public string More { get; set; }
+        public bool Used { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Archives> Archives { get; set; }

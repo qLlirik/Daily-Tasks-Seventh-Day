@@ -10,5 +10,6 @@ namespace SeventhDay.HelpClasses
     {
         static public DB.Users AuthUser;
         static public DB.Entity db = new DB.Entity();
+        static public DB.Vacancies SelectVacancy;
     }
 }

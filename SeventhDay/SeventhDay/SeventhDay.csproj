@@ -66,11 +66,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PartialClasses\Jobless.cs" />
     <Compile Include="UserControls\VacancyUserControl.xaml.cs">
       <DependentUpon>VacancyUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\AddNewJoblessWindow.xaml.cs">
+      <DependentUpon>AddNewJoblessWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AddNewVacancyWindow.xaml.cs">
       <DependentUpon>AddNewVacancyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ChooseVacancyWindow.xaml.cs">
+      <DependentUpon>ChooseVacancyWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainMenuWindow.xaml.cs">
       <DependentUpon>MainMenuWindow.xaml</DependentUpon>
@@ -128,7 +135,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\AddNewJoblessWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\AddNewVacancyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ChooseVacancyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

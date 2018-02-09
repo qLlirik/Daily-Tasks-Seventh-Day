@@ -11,7 +11,7 @@
         <Button Click="clickLogout" Content="Выход" Width="100" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Click="click_Vacancies" Content="Вакансии" Width="250" Height="40" Margin="5"/>
-            <Button Content="Добавить безработного" Width="250" Height="40" Margin="5"/>
+            <Button Click="click_AddNewJobless" Content="Добавить безработного" Width="250" Height="40" Margin="5"/>
         </StackPanel>
     </Grid>
 </Window>

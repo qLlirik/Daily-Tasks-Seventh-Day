@@ -51,7 +51,7 @@ namespace SeventhDay.Windows
 
             Random r = new Random();
             wp.Children.Clear();
-            foreach(var i in qwery)
+            foreach(var i in qwery.Where(w=>w.Used == true))
             {
                 UserControls.VacancyUserControl uc = new UserControls.VacancyUserControl();
                 uc.DataContext = i;
@@ -68,7 +68,9 @@ namespace SeventhDay.Windows
 
         private void Uc_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            
+            HelpClasses.StaticClass.SelectVacancy = (DB.Vacancies)((UserControl)sender).DataContext;
+            new ChooseVacancyWindow().Show();
+            this.Close();
         }
     }
 }

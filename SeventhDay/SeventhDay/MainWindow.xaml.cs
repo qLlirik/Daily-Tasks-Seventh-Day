@@ -54,10 +54,11 @@ namespace SeventhDay
                 else
                     System.IO.File.WriteAllText("RemeberMe.txt", "null");
                 new Windows.MainMenuWindow().Show();
+                this.Close();
             }
             catch
             {
-                MessageBox.Show("So user cannot be finded!","Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("Такой пользователь не найден!","Error",MessageBoxButton.OK,MessageBoxImage.Error);
             }
         }
 
